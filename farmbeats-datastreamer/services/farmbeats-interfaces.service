@@ -1,0 +1,13 @@
+[Unit]
+Description=FarmBeats Data Streamer Interface Service
+After=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/bash -u 00-farmbeats-interfaces.sh
+WorkingDirectory=/home/pi/farmbeats-datastreamer/scripts
+User=root
+
+[Install]
+WantedBy=multi-user.target

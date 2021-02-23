@@ -1,0 +1,14 @@
+[Unit]
+Description=FarmBeats for Students Kit - Sensor Data to Microsoft Data Streamer
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u main.py
+WorkingDirectory=/home/pi/farmbeats-datastreamer
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

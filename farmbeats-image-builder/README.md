@@ -16,11 +16,11 @@ This is a shell script that runs on a Raspberry Pi 4 B. This is required so that
 The build process loads the image file into a loopback device, expands the image partition, mounts the image into a local folder, and installs packages, files, and services onto the image. The image is then compressed and ready to write to an SD card.
 
 To run the shell script first clone this repository:
-''''shell
+```shell
     git clone https://github.com/microsoft/farmbeatsforstudents.git
     cd farmbeatsforstudents/farmbeats-image-builder
     sudo ./farmbeats-image-builder.sh --interactive
-'''
+```
 
 The followiong files are used to build the image:
 

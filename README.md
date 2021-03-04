@@ -1,6 +1,12 @@
+[https://github.com/microsoft/farmbeatsforstudents](https://github.com/microsoft/farmbeatsforstudents)
+
 # FarmBeats for Students Grove Smart Agriculture Kit
 
 Precision Agriculture Experiences for School and Home
+
+This program combines an affordable hardware kit (based on the Raspberry Pi 4 B) with curriculum and activities designed to give students hands-on experience in applying precision agriculture techniques to food production. 
+
+To learn more please visit the FarmBeats website to download the kit instructions, curriculum, and activities for the classroom: [https://aka.ms/farmbeatsforstudents](https://aka.ms/farmbeatsforstudents)
 
 ## Contents
 
@@ -10,9 +16,13 @@ This project contains 2 code bases:
 
 Python code that runs on the Raspberry Pi. Manages sensor collection, serial data communication, log file read/writes, and the reactive agent.
 
+[https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-image-builder](https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-image-builder)
+
 ### farmbeats-image-builder
 
 A tool used to produce a custom Raspberry Pi OS SD card image for the FarmBeats for Students Grove Smart Agriculture Kit.
+
+[https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-datastreamer](https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-datastreamer)
 
 ## Contributing
 

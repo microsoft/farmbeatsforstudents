@@ -1,3 +1,5 @@
+[https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-image-builder](https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-image-builder)
+
 # FarmBeats Image Builder
 
 The FarmBeats Image Builder is a tool used to produce a custom Raspberry Pi OS SD card image for the FarmBeats for Students Grove Smart Agriculture Kit.

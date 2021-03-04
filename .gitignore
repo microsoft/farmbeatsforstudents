@@ -1,0 +1,4 @@
+# Repo specific
+*.img
+*.zip
+/farmbeats-image-builder/images

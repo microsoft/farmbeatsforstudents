@@ -35,15 +35,20 @@ The Raspberry Pi manages the following:
 
 ## Serial Communication
 
-The Raspberry Pi interacts with a custom Excel workbook using the Microsoft Data Streamer Add-in for Excel. Data sent from the Pi to Excel will stream into worksheet 'Data In', and data sent from Excel worksheet 'Data Out' streams to the Pi. For more information about Microsoft Data Streamer visit: <https://docs.microsoft.com/en-us/microsoft-365/education/data-streamer/>
+The Raspberry Pi interacts with a custom Excel workbook using the Microsoft Data Streamer Add-in for Excel. Data transmitted from the Pi to Excel will stream into worksheet 'Data In', and data sent from Excel worksheet 'Data Out' streams to the Pi. For more information about Microsoft Data Streamer visit: <https://docs.microsoft.com/en-us/microsoft-365/education/data-streamer/>
 
-Interaction with the Pi can also be managed by any program or device capable and sending and receiving serial data by using the following schema.
+Interaction with the Pi can also be managed by any serial terminal program or any device capable of sending and receiving serial data by using the following schema.
 
 ### Serial Data Schema
 
-The serial data format is a comma delimited string with the following fields.
+The serial data format is a comma delimited string with a single line ending character.
 
-#### Serial data sent from the Pi
+Example:
+`"data1,data2\n"`
+
+#### Serial data transmitted by the Pi
+
+The data transmitted is a series of live data points from sensors and variables that indicate the current state of the Pi.
 
 * Column 1: Raspberry Pi Time
 * Column 2: Soil temperature
@@ -61,12 +66,12 @@ The serial data format is a comma delimited string with the following fields.
 * Column 14: Agent Update
 * Column 15: Number of rows in data log
 
-**Example**
-    9:30:45.37,01-06-2021 12:30:41,22.62,0.01,21,51.7,261,0.02,254,0,0,Logging,10:10:0:<:21.1:AND::::AND:::,1,,
+Example:
+`01-06-2021 12:30:41,22.62,0.01,21,51.7,261,0.02,254,0,0,Logging,10:10:0:<:21.1:AND::::AND:::,1,,`
 
 #### Serial data received by the Pi
 
-The data received is a set of commands that control the program flow on teh Raspberry Pi.
+The data received is a set of commands that control the program flow on the Raspberry Pi. These commands can be sent to the Pi using the Excel workbook, or a serial terminal program, which is very useful for testing and debugging.
 
 * Column 1: Set Logger Status
 * Column 2: Set Agent Configuration Set
@@ -101,7 +106,7 @@ The Agent will act on the Relay. Only one Configuration set will be possible at 
 
 #### Configuration Set parameters
 
-* Polling Interval: Interval that sensors are polled for data (sense the environment)  
+* Polling Interval: Interval that sensors are polled for data (sense the environment)
 * Agent Duration: Amount of time that the agent turns on the relay (affect the environment)
 
 #### Rule Set parameters
@@ -118,7 +123,7 @@ The Agent will act on the Relay. Only one Configuration set will be possible at 
 
 ### Agent Data Display
 
-The agent configuration will be sent from the Raspberry Pi to Excel using the Configuration Set schema below. The agent configuration data will be updated and prominently displayed in the Excel workbook.  
+The agent configuration will be sent from the Raspberry Pi to Excel using the Configuration Set schema below. The agent configuration data will be updated and prominently displayed in the Excel workbook.
 
 #### Configuration Set Schema
 
@@ -163,19 +168,19 @@ AND | ==
 * C3: Comparator for S3
 * T3: Threshold for S3
 
-**Example using placeholders**
+Example using placeholders:
 `PI:AD:S1:C1:T1:X2:S2:C2:T2:X3:S3:C3:T3`
 
-**Example using values**
+Example using values:
 `60:60:1:<:90:AND:3:>:25:AND:4:==:23`
 
 The processing of the Configuration Set will stop after the first empty parameter. Incomplete Rule Sets will be discarded.
 
-**Example 1**
+Example 1:
 Poll every 10 minutes. Active for 30 seconds. Set agent to trigger when air temperature is greater than 60.
 `600:30:2:>:60`
 
-**Example 2**
+Example 2:
 Poll every minute. Active for 15 seconds. Trigger when soil moisture is greater than 1000 AND when soil temperature is greater than 100 AND when air humidity is less than 15.
 `60:15:2:>:1000:AND:1:>:100:AND:4:<:15`
 

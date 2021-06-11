@@ -32,7 +32,7 @@ Then run install.sh:
     sudo ./install.sh
 ```
 
-## What is isntalled
+## What's installed
 
 ### farmbeats-datastreamer directory
 

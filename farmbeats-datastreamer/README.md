@@ -32,7 +32,33 @@ Then run install.sh:
     sudo ./install.sh
 ```
 
+## What is isntalled
+
+### farmbeats-datastreamer directory
+
+The farmbeats-datastreamer contains the python code files for the FarmBeats application.
+
+### farmbeats-datastreamer.service
+
+The farmbeats-datastreamer.service file is registered with Systemd and runs every time the Pi boots up, and will recover if it crashes. Its purpose is to run the FarmBeats application and perform the functions described in the next sections.
+
+### farmbeats-interfaces.service
+
+The farmbeats-interfaces.service file is registered with Systemd and runs once every time the Pi boots up. Its purpose is to set the interfaces required for the FarmBeats application to function. By default the following are enabled:
+
+* Camera
+* SSH
+* VNC
+* SPI
+* I2C
+* Serial Port
+* 1-Wire
+* Remote GPIO
+
+The Serial Console is disabled to free up the UART for serial communication.
+
 ## Raspberry Pi
+
 The Raspberry Pi manages the following:
 
 * Sensor data collection

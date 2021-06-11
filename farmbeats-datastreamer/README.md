@@ -2,7 +2,7 @@
 
 # Introduction
 
-The FarmBeats for Students Grove Smart Agriculture Kit is a garden monitoring system that consists of the Raspberry Pi 4 Small Board Computer (SBC), several environmental sensors that monitor soil and atmospheric conditions, a relay indicator/actuator, and a USB serial cable for data transmission. The data is visualized and analyized using a custom Excel workbook.
+The FarmBeats for Students Grove Smart Agriculture Kit is a garden monitoring system that consists of the Raspberry Pi 4 Small Board Computer (SBC), several environmental sensors that monitor soil and atmospheric conditions, a relay indicator/actuator, and a USB serial cable for data transmission. The data is visualized and analyzed using a custom Excel workbook.
 
 Visit the website: [https://aka.ms/farmbeatsforstudents](https://aka.ms/farmbeatsforstudents)
 

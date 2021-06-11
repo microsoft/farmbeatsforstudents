@@ -6,9 +6,31 @@ The FarmBeats for Students Grove Smart Agriculture Kit is a garden monitoring sy
 
 Visit the website: [https://aka.ms/farmbeatsforstudents](https://aka.ms/farmbeatsforstudents)
 
-Purchase the hardware kit: [https://aka.ms/fbfshardware](https://aka.ms/fbfshardware)
+Purchase the hardware kit: [https://aka.ms/fbfskit](https://aka.ms/fbfskit)
 
 Download the kit build instructions: [https://aka.ms/fbfsbuildinstructions](https://aka.ms/fbfsbuildinstructions)
+
+**Note:** This is not a standalone project. The python program expects the assembled kit (Grove Pi hat and sensors) to be connected to the Pi.
+
+## Installation
+
+To install FarmBeats for Students on the Raspberry Pi first clone this repository:
+
+```bash
+    git clone https://github.com/microsoft/farmbeatsforstudents.git
+```
+
+Then navigate to the repo:
+
+```bash
+    cd farmbeatsforstudents/farmbeats-datastreamer
+```
+
+Then run install.sh:
+
+```bash
+    sudo ./install.sh
+```
 
 ## Raspberry Pi
 The Raspberry Pi manages the following:

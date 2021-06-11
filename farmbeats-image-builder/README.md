@@ -6,27 +6,48 @@ The FarmBeats Image Builder is a tool used to produce a custom Raspberry Pi OS S
 
 ## SD card image releases
 
-Current SD card image release are always available here:
+**Note:** If you just want to burn the latest SD card image, new releases are always available here:
 [https://aka.ms/fbfsimage](https://aka.ms/fbfsimage)
 
 ## Prerequisites
 
-This is a shell script that runs on a Raspberry Pi 4 B. This is required so that the image can be virtualized with the correct architecture (arm).
+This is a shell script that runs on a Raspberry Pi 4 B. This is required so that the image can be virtualized with the correct architecture (ARM).
 
-## How the build process works
-
-The build process loads the image file into a loopback device, expands the image partition, mounts the image into a local folder, and installs packages, files, and services onto the image. The image is then compressed and ready to write to an SD card.
+## Running farmbeats-image-builder.sh
 
 To run the shell script first clone this repository:
-```shell
+
+```bash
     git clone https://github.com/microsoft/farmbeatsforstudents.git
+```
+
+Then navigate to the repo:
+
+```bash
     cd farmbeatsforstudents/farmbeats-image-builder
+```
+
+To run the image builder in interactive mode use:
+
+```bash
     sudo ./farmbeats-image-builder.sh --interactive
 ```
 
-The followiong files are used to build the image:
+The first time it is best to use --interactive so you get a feel for what the script does. Alternatively you can run it in --noninteractive mode, which will still require input upfront (image name, size, etc) but the majority of the install will run without user input repquired.
 
-* farmbeats-image-builder.sh`
+```bash
+    sudo ./farmbeats-image-builder.sh --noninteractive
+```
+
+## How the build process works
+
+The bash script will prompt the user for an image version number and the size to expand the image prior to installing farmbeats-datastreamer. Using this input, the build script loads a Raspberry Pi OS image file onto a loopback device, expands the image partition, and mounts the image into a local folder. A few virtualized directories from the host are attached and the script then installs packages, files, and services onto the image. Once insallation is complete, the image is then compressed and place in the `images/` folder. You are now ready to write to an SD card.
+
+## Build files
+
+The following files are used to build the image:
+
+* 'farmbeats-image-builder.sh`
   * The main shell script
 
 * `setup.sh`
@@ -88,5 +109,3 @@ The followiong files are used to build the image:
 * `cleanup.sh`
   * Removes loopback device
   * Deletes working image file
-
-The bash script will prompt the user for an image version number and the size to expand the image prior to installing farmbeats-datastreamer.

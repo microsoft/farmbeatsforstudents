@@ -4,33 +4,85 @@
 
 The FarmBeats for Students Grove Smart Agriculture Kit is a garden monitoring system that consists of the Raspberry Pi 4 Small Board Computer (SBC), several environmental sensors that monitor soil and atmospheric conditions, a relay indicator/actuator, and a USB serial cable for data transmission. The data is visualized and analyzed using a custom Excel workbook.
 
-Visit the website: [https://aka.ms/farmbeatsforstudents](https://aka.ms/farmbeatsforstudents)
+Helpful FarmBeats resources:
+* FarmBeats for Students website: [https://aka.ms/farmbeatsforstudents](https://aka.ms/farmbeatsforstudents)
+* Purchase the hardware kit: [https://aka.ms/fbfskit](https://aka.ms/fbfskit)
+* Download the kit build instructions: [https://aka.ms/fbfsbuildinstructions](https://aka.ms/fbfsbuildinstructions)
+* Download the Excel workbook: [https://aka.ms/FBFSWorkbook](https://aka.ms/FBFSWorkbook)
 
-Purchase the hardware kit: [https://aka.ms/fbfskit](https://aka.ms/fbfskit)
-
-Download the kit build instructions: [https://aka.ms/fbfsbuildinstructions](https://aka.ms/fbfsbuildinstructions)
-
-**Note:** This is not a standalone project. The python program expects the assembled kit (Grove Pi hat and sensors) to be connected to the Pi.
+**Note:** The FarmBeats  application requires the hardware kit to be assembled and connected to the Pi.
 
 ## Installation
 
-To install FarmBeats for Students on the Raspberry Pi first clone this repository:
+There are 2 ways to install the FarmBeats for Students application on the Pi
+
+* **SD Card Installation:** Write the FarmBeats for Students image to your SD card. Our image has the FarmBeats application pre-installed for a no-code, plug-and-play experience. This is the recommended and supported method.
+
+* **Manual Installation:** This option is best for those that are familiar with the Raspberry Pi and those who want to customize the FarmBeats experience.
+
+### SD Card Installation
+
+Start with our custom Raspberry Pi image with the FarmBeats application pre-installed and configured. This is the recommended method and is perfect for schools and classrooms, and anyone who wants a no-code solution.
+
+To write the FarmBeats image to your SD card:
+
+* Download the latest FarmBeats for Students SD card image here: [https://aka.ms/FBFSImage](https://aka.ms/FBFSImage)
+* Write the image to your SD card using the [Raspberry Pi Imager](https://www.raspberrypi.org/software/)
+* Place the SD card in the Pi
+* Power up the Pi. The 1st boot will take ~2 minutes to configure the FarmBeats application. Subsequent boots will take 30 seconds.
+* Done! You are now ready to connect to the [custom Excel workbook](https://aka.ms/FBFSWorkbook) to visualize your sensor data.
+
+**Once the FarmBeats application is installed it will run at boot. You do not need to install anything or do anything else.**
+
+### Manual Installation
+
+Start with a fresh Raspberry Pi OS (32-bit) image using [Raspberry Pi Imager](https://www.raspberrypi.org/software/), or add FarmBeats to your current environment. Manual installation requires the use of the [Raspberry Pi terminal](https://www.raspberrypi.org/documentation/usage/terminal/) and git.
+
+To manually install FarmBeats for Students on the Raspberry Pi:
+
+* Clone this repository:
 
 ```bash
-    git clone https://github.com/microsoft/farmbeatsforstudents.git
+  git clone https://github.com/microsoft/farmbeatsforstudents.git
 ```
 
-Then navigate to the repo:
+* Navigate to the farmbeats-datastreamer directory:
 
 ```bash
-    cd farmbeatsforstudents/farmbeats-datastreamer
+  cd farmbeatsforstudents/farmbeats-datastreamer
 ```
 
-Then run install.sh:
+* Run install.sh:
 
 ```bash
-    sudo ./install.sh
+  sudo ./install.sh
 ```
+
+At the completion of the installation the Pi will automatically reboot and the FarmBeats application will be installed. **Once the FarmBeats application is installed it will run at boot. You do not need to do anything else.**
+
+### Manually running the python application
+
+If you want to explore how the FarmBeats application works by manually running `main.py` in a python shell, you will need to disable the farmbeats-datastreamer service first. This will prevent a dual instance of the application which will have errors due to instances accessing the same files.
+
+To stop the service:
+
+```bash
+  sudo systemctl stop farmbeats-datastreamer
+```
+
+Once you are done with your explorations and modifications, save your work and re-enable the service:
+
+```bash
+  sudo systemctl start farmbeats-datastreamer
+```
+
+To check the status of the service:
+
+```bash
+  journalctl -u farmbeats-datastreamer
+```
+
+**Note:** When manually running `main.py` it must been done as user root. Pi does not have sufficient privileges.
 
 ## What's installed
 

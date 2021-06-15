@@ -5,6 +5,7 @@
 The FarmBeats for Students Grove Smart Agriculture Kit is a garden monitoring system that consists of the Raspberry Pi 4 Small Board Computer (SBC), several environmental sensors that monitor soil and atmospheric conditions, a relay indicator/actuator, and a USB serial cable for data transmission. The data is visualized and analyzed using a custom Excel workbook.
 
 Helpful FarmBeats resources:
+
 * FarmBeats for Students website: [https://aka.ms/farmbeatsforstudents](https://aka.ms/farmbeatsforstudents)
 * Purchase the hardware kit: [https://aka.ms/fbfskit](https://aka.ms/fbfskit)
 * Download the kit build instructions: [https://aka.ms/fbfsbuildinstructions](https://aka.ms/fbfsbuildinstructions)
@@ -58,31 +59,7 @@ To manually install FarmBeats for Students on the Raspberry Pi:
   sudo ./install.sh
 ```
 
-At the completion of the installation the Pi will automatically reboot and the FarmBeats application will be installed. **Once the FarmBeats application is installed it will run at boot. You do not need to do anything else.**
-
-### Manually running the python application
-
-If you want to explore how the FarmBeats application works by manually running `main.py` in a python shell, you will need to disable the farmbeats-datastreamer service first. This will prevent a dual instance of the application which will have errors due to instances accessing the same files.
-
-To stop the service:
-
-```bash
-  sudo systemctl stop farmbeats-datastreamer
-```
-
-Once you are done with your explorations and modifications, save your work and re-enable the service:
-
-```bash
-  sudo systemctl start farmbeats-datastreamer
-```
-
-To check the status of the service:
-
-```bash
-  journalctl -u farmbeats-datastreamer
-```
-
-**Note:** When manually running `main.py` it must been done as user root. Pi does not have sufficient privileges.
+**Once the FarmBeats application is installed it will run at boot. You do not need to do anything else.**
 
 ## What's installed
 
@@ -282,7 +259,7 @@ Poll every 10 minutes. Active for 30 seconds. Set agent to trigger when air temp
 
 Example 2:
 Poll every minute. Active for 15 seconds. Trigger when soil moisture is greater than 1000 AND when soil temperature is greater than 100 AND when air humidity is less than 15.
-`60:15:2:>:1000:AND:1:>:100:AND:4:<:15`
+`60:15:2:>:1000:AND:1:>100:AND:4:<:15`
 
 ## Timestamp
 
@@ -294,6 +271,10 @@ When the Raspberry Pi is not connected to a network it cannot connect to a time 
 To set the date and time to January 4th, 2021 at 6:35am exactly, the string would be:
 
 `2021_1_4_6_35_00`
+
+## Settings
+
+Settings are saved in the `farmbeatsforstudents/farmbeats-datastreamer/` directory in `
 
 ## Button Functions
 
@@ -350,3 +331,46 @@ The larger the `size` you sample, the smoother the readings, however, the larger
 Using `rolling_average()` requires an array for this function to store paste readings into. Create an array for each sensor that has data in need of smoothing. Sensors like the Capacitive Soil Moisture sensor tend to be noisy and will benefit from a sample `size` of 20 readings whereas the DHT11 Air Temp/Humid sensor may only require a sample `size` of 10 to be usable.
 
 You can also set filters for data upper and lower thresholds by changing the values of ` upper_reasonable_bound ` and ` lower_reasonable_bound `.
+
+## Advanced Users
+
+If you are comfortable using the Raspberry Pi, have built project of your own, want to customize the FarmBeats application, or are just curious as to how things work under the hood, this is for you!
+
+### Clone the repository
+
+Start with a fresh Raspberry Pi OS (32-bit) image using [Raspberry Pi Imager](https://www.raspberrypi.org/software/), or add it to your current environment. Once booted open a terminal session.
+
+Clone this repository and navigate to the farmbeats-datastreamer directory:
+
+```bash
+  git clone https://github.com/microsoft/farmbeatsforstudents.git
+  cd farmbeatsforstudents/farmbeats-datastreamer
+```
+
+Now you are ready to explore the FarmBeats application.
+
+**Note:** The FarmBeats application needs to under **root** privileges due to file permissions. This means you will need to run any IDEs as **root** as well. 
+
+### Manually running the python application
+
+If you have already installed FarmBeats using the [instructions above](https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-datastreamer#installation) you will need to either run `uinstall.sh`, or stop the farmbeats-datastreamer service first. This will prevent a dual instance of the application which will cause errors due to instances accessing the same files.
+
+To stop the service:
+
+```bash
+  sudo systemctl stop farmbeats-datastreamer
+```
+
+Once you are done with your explorations and modifications, save your work and start the service:
+
+```bash
+  sudo systemctl start farmbeats-datastreamer
+```
+
+To check the status of the service:
+
+```bash
+  journalctl -u farmbeats-datastreamer
+```
+
+**Note:** Running `main.py` must been done as user **root**. The user **pi** does not have sufficient privileges.

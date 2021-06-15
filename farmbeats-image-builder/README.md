@@ -41,13 +41,15 @@ The first time it is best to use --interactive so you get a feel for what the sc
 
 ## How the build process works
 
-The bash script will prompt the user for an image version number and the size to expand the image prior to installing farmbeats-datastreamer. Using this input, the build script loads a Raspberry Pi OS image file onto a loopback device, expands the image partition, and mounts the image into a local folder. A few virtualized directories from the host are attached and the script then installs packages, files, and services onto the image. Once insallation is complete, the image is then compressed and place in the `images/` folder. You are now ready to write to an SD card.
+The build files are used to produce the SD card image. The content is pulled from the `farmbeatsforstudents/farmbeats-datastreamer` directory. Please see [farmbeats-datastreamer](https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-datastreamer) for more information.
+
+The bash script will prompt the user for an image version number and the size to expand the image prior to installing farmbeats-datastreamer. Using this input, the build script loads a Raspberry Pi OS image file onto a loopback device, expands the image partition, and mounts the image into a local folder. A few virtualized directories from the host are attached and the script then installs packages, files, and services onto the image. Once installation is complete, the image is then compressed and place in the `images/` folder. You are now ready to write to an SD card.
 
 ## Build files
 
 The following files are used to build the image:
 
-* 'farmbeats-image-builder.sh`
+* `farmbeats-image-builder.sh`
   * The main shell script
 
 * `setup.sh`

@@ -39,18 +39,14 @@ header "enabling farmbeats-datastreamer.service"
 sudo chmod 664 /etc/systemd/system/farmbeats-datastreamer.service
 sudo systemctl enable farmbeats-datastreamer.service
 
-header "starting farmbeats-datastreamer.service"
-sudo systemctl start farmbeats-datastreamer.service
-
 # farmbeats-interfaces.service
 header "moving farmbeats-interfaces.service to systemd"
 sudo cp /home/pi/farmbeats-datastreamer/services/farmbeats-interfaces.service /etc/systemd/system
 
-header "enabling datastreamer.service"
+header "enabling farmbeats-interfaces.service"
 sudo chmod 664 /etc/systemd/system/farmbeats-interfaces.service
 sudo systemctl enable farmbeats-interfaces.service
 
-# print before forced reboot when farmbeats-interfaces.service starts"
 printf "\n\n"
 echo "##################################################"
 echo "--------------------------------------------------"
@@ -59,7 +55,8 @@ echo "--------------------------------------------------"
 echo "##################################################"
 printf "\n\n"
 
-header "starting farmbeats-interfaces.service"
-sudo systemctl start farmbeats-interfaces.service
+printf "\n\n"
+echo "*** SYSTEM WILL NOW REBOOT ***"
+printf "\n\n"
 
 sudo reboot now

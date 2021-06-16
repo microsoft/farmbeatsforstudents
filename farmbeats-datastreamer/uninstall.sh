@@ -29,7 +29,7 @@ sudo rm /etc/systemd/system/farmbeats-datastreamer.service
 
 # farmbeats-interfaces.service
 header "disabling farmbeats-interfaces.service"
-sudo systemctl enable farmbeats-interfaces.service
+sudo systemctl disable farmbeats-interfaces.service
 
 header "removing farmbeats-interfaces.service from systemd"
 sudo rm /etc/systemd/system/farmbeats-interfaces.service

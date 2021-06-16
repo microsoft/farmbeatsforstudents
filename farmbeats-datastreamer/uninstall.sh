@@ -28,11 +28,11 @@ header "removing farmbeats-datastreamer.service from systemd"
 sudo rm /etc/systemd/system/farmbeats-datastreamer.service
 
 # farmbeats-interfaces.service
-header "disabling datastreamer.service"
+header "disabling farmbeats-interfaces.service"
 sudo systemctl enable farmbeats-interfaces.service
 
 header "removing farmbeats-interfaces.service from systemd"
-sudo mv /home/pi/farmbeats-datastreamer/services/farmbeats-interfaces.service /etc/systemd/system
+sudo rm /etc/systemd/system/farmbeats-interfaces.service
 
 printf "\n\n"
 echo "##################################################"

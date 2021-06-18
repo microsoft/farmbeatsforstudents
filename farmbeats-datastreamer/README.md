@@ -61,6 +61,10 @@ To manually install FarmBeats for Students on the Raspberry Pi:
 
 **Once the FarmBeats application is installed it will run at boot. You do not need to do anything else.**
 
+## Known Issue
+
+There is a known issue with the serial-TTL chipset driver. Please see [this issue](https://github.com/microsoft/farmbeatsforstudents/issues/1).
+
 ## What's installed
 
 ### farmbeats-datastreamer directory

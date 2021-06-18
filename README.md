@@ -16,13 +16,13 @@ This project contains 2 code bases:
 
 Python code that runs on the Raspberry Pi. Manages sensor collection, serial data communication, log file read/writes, and the reactive agent.
 
-[https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-image-builder](https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-image-builder)
+[https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-datastreamer](https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-datastreamer)
 
 ### farmbeats-image-builder
 
 A tool used to produce a custom Raspberry Pi OS SD card image for the FarmBeats for Students Grove Smart Agriculture Kit.
 
-[https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-datastreamer](https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-datastreamer)
+[https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-image-builder](https://github.com/microsoft/farmbeatsforstudents/tree/main/farmbeats-image-builder)
 
 ## Contributing
 

@@ -13,6 +13,12 @@ The FarmBeats Image Builder is a tool used to produce a custom Raspberry Pi OS S
 
 This is a shell script that runs on a Raspberry Pi 4 B. This is required so that the image can be virtualized with the correct architecture (ARM).
 
+The zip package is a prerequisite:
+
+```bash
+    sudo apt-get install zip -y
+```
+
 ## Running farmbeats-image-builder.sh
 
 To run the shell script first clone this repository:

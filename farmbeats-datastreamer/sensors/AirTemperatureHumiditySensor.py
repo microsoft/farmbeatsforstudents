@@ -1,25 +1,17 @@
 from sensors.BaseSensor import BaseSensor
-from seeed_dht import DHT
 import time
+from jacdac import Bus
+from jacdac.thermometer import ThermometerClient
+from jacdac.humidity import HumidityClient
 
 class AirTemperatureHumiditySensor(BaseSensor):
-    def __init__(self):
-        BaseSensor.__init__(self)
+    def __init__(self, bus: Bus):
+        BaseSensor.__init__(self, bus)
 
-        self.dht_pin = 16
-        self.dht_type = '11'
         self.humidity_measurements = []
         self.temperature_measurements = []
-        self.sensor = None
-        self.setup()
-
-    def setup(self):
-        try:
-            self.sensor = DHT(self.dht_type, self.dht_pin)
-            self.init = True
-        except Exception as e:
-            print("AirTemperatureHumiditySensor.setup: " + str(e))
-            self.init = False
+        self.humidity_sensor = HumidityClient(self.bus, "air.humidity")
+        self.temperature_sensor = ThermometerClient(self.bus, "air.temperature")
 
     def read(self):
         air_humidity, air_temperature = self._take_readings()
@@ -38,15 +30,11 @@ class AirTemperatureHumiditySensor(BaseSensor):
         return air_humidity, air_temperature
 
     def _take_readings(self):
-        try:
-            if not self.init:
-                self.setup()
-            air_humidity, air_temperature = self.sensor.read()
-
-        except Exception as e:
-            print("AirTemperatureHumiditySensor.read: " + str(e))
-            self.init = False
-            air_humidity, air_temperature = self.null_value, self.null_value
-
-        finally:
-            return air_humidity, air_temperature
+        air_humidity = self.humidity_sensor.humidity
+        if air_humidity is None:
+            air_humidity = self.null_value
+        air_temperature = self.temperature_sensor.temperature
+        if air_temperature is None:
+            air_temperature = self.null_value
+        
+        return air_humidity, air_temperature

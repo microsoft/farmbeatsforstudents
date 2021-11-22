@@ -1,5 +1,8 @@
+from jacdac import Bus
+
 class BaseSensor():
-    def __init__(self):
+    def __init__(self, bus: Bus):
+        self.bus = bus
         self.null_value = 0
         self.sensor = None
         self.measurements = []

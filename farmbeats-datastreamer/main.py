@@ -9,15 +9,16 @@ from agent.Agent import Agent
 from sensors.PowerButton import PowerButton
 from sensors.DataButton import DataButton
 from sensors.RelaySensor import RelaySensor
+from jacdac import Bus
 
+bus = Bus()
 data_settings = DataSettings()
 data_streamer = DataStreamer()
 data_logger = DataLogger(data_streamer)
 relay = RelaySensor()
 agent = Agent(data_settings, relay)
-power_button_pin, data_button_pin = 18, 19  # Grove Base Hat connector D18
-power_button = PowerButton(power_button_pin)
-data_button = DataButton(data_button_pin)
+power_button = PowerButton(bus)
+data_button = DataButton(bus)
 command_queue = queue.Queue()
 
 def setup():

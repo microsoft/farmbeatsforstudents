@@ -1,25 +1,20 @@
 from sensors.BaseSensor import BaseSensor
-from seeed_dht import DHT
 import time
+from jacdac import Bus
+from jacdac.thermometer import ThermometerClient
+from jacdac.humidity import HumidityClient
+
 
 class AirTemperatureHumiditySensor(BaseSensor):
-    def __init__(self):
-        BaseSensor.__init__(self)
+    def __init__(self, bus: Bus):
+        BaseSensor.__init__(self, bus)
 
-        self.dht_pin = 16
-        self.dht_type = '11'
         self.humidity_measurements = []
         self.temperature_measurements = []
-        self.sensor = None
-        self.setup()
-
-    def setup(self):
-        try:
-            self.sensor = DHT(self.dht_type, self.dht_pin)
-            self.init = True
-        except Exception as e:
-            print("AirTemperatureHumiditySensor.setup: " + str(e))
-            self.init = False
+        self.humidity_sensor = HumidityClient(
+            self.bus, "air.humidity", missing_humidity_value=self.null_value)
+        self.temperature_sensor = ThermometerClient(
+            self.bus, "air.temperature", missing_temperature_value=self.null_value)
 
     def read(self):
         air_humidity, air_temperature = self._take_readings()
@@ -32,21 +27,15 @@ class AirTemperatureHumiditySensor(BaseSensor):
             if (air_temperature == 0):
                 air_temperature = reT
 
-        air_humidity = self.rolling_average(air_humidity, self.humidity_measurements,10)
-        air_temperature = self.rolling_average(air_temperature, self.temperature_measurements,10)
+        air_humidity = self.rolling_average(
+            air_humidity, self.humidity_measurements, 10)
+        air_temperature = self.rolling_average(
+            air_temperature, self.temperature_measurements, 10)
 
         return air_humidity, air_temperature
 
     def _take_readings(self):
-        try:
-            if not self.init:
-                self.setup()
-            air_humidity, air_temperature = self.sensor.read()
+        air_humidity = self.humidity_sensor.humidity
+        air_temperature = self.temperature_sensor.temperature
 
-        except Exception as e:
-            print("AirTemperatureHumiditySensor.read: " + str(e))
-            self.init = False
-            air_humidity, air_temperature = self.null_value, self.null_value
-
-        finally:
-            return air_humidity, air_temperature
+        return air_humidity, air_temperature

@@ -3,6 +3,7 @@ from sensors.BaseSensor import BaseSensor
 from jacdac import Bus
 from jacdac.uv_index import UvIndexClient
 
+
 class SunlightSensor(BaseSensor):
     def __init__(self, bus: Bus):
         BaseSensor.__init__(self, bus)
@@ -19,7 +20,8 @@ class SunlightSensor(BaseSensor):
         if uv_index is None:
             sunlight_uv = self.null_value
         else:
-            sunlight_uv = self.sensor.ReadUV / 100
-            sunlight_uv = self.rolling_average(sunlight_uv, self.measurements,10)
+            sunlight_uv = sunlight_uv / 100
+            sunlight_uv = self.rolling_average(
+                sunlight_uv, self.measurements, 10)
 
         return (sunlight_visible, sunlight_uv, sunlight_ir)

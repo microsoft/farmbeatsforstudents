@@ -1,5 +1,5 @@
 from sensors.BaseSensor import BaseSensor
-from seeed_si114x import grove_si114x
+from seeed_si114x import grove_si115x
 
 class SunlightSensor(BaseSensor):
     def __init__(self):
@@ -9,7 +9,7 @@ class SunlightSensor(BaseSensor):
 
     def setup(self):
         try:
-            self.sensor = grove_si114x()
+            self.sensor = grove_si115x()
             self.init = True
         except Exception as e:
             print("SunlightSensor.setup: " + str(e))

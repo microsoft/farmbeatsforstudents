@@ -1,5 +1,5 @@
 from sensors.BaseSensor import BaseSensor
-from seeed_si114x import grove_si115x
+from seeed_si115x import grove_si115x
 
 class SunlightSensor(BaseSensor):
     def __init__(self):
